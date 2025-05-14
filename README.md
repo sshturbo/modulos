@@ -9,6 +9,10 @@
 ## Instalação rápida com o binário gerado
 
     wget -qO- https://raw.githubusercontent.com/sshturbo/modulos/refs/heads/main/install.sh | sudo bash -s d6dbaa87ceda172a41971ad3796056d4
+
+## Remover o docker
+
+   wget -qO- https://raw.githubusercontent.com/sshturbo/modulos/refs/heads/main/delete.sh | sudo bash
     
 ## Como executar
 
