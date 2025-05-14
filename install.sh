@@ -131,7 +131,7 @@ progress_bar 5
 cat > "$APP_DIR/config.json" <<EOF
 {
     "api_token": "$API_TOKEN",
-    "domain": "https://modulos.painelwebpro.com.br",
+    "domain": "https://modulos.painelwebpro.com.br/online.php",
     "logs_enabled": true
 }
 EOF
