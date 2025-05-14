@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ===============================
-# Configurações e Variáveis Globais
+# ConfiguraÃ§Ãµes e VariÃ¡veis Globais
 # ===============================
 APP_DIR="/opt/myapp"
 DEPENDENCIES=("unzip")
@@ -28,13 +28,13 @@ aarch64)
     DOCKER_ARCH="aarch64"
     ;;
 *)
-    echo "Arquitetura $ARCH não suportada."
+    echo "Arquitetura $ARCH nÃ£o suportada."
     exit 1
     ;;
 esac
 
 # ===============================
-# Funções Utilitárias
+# FunÃ§Ãµes UtilitÃ¡rias
 # ===============================
 print_centered() {
     printf "\e[33m%s\e[0m\n" "$1"
@@ -70,7 +70,7 @@ run_with_spinner() {
 }
 
 print_centered "Modulos do painel Web Pro"
-print_centered "Versão: $VERSION"
+print_centered "VersÃ£o: $VERSION"
 print_centered "Arquitetura: $ARCH"
 
 install_if_missing() {
@@ -78,44 +78,44 @@ install_if_missing() {
     if ! command -v $package &>/dev/null; then
         run_with_spinner "apt-get install -y $package" "INSTALANDO $package"
     else
-        print_centered "$package JÁ ESTÁ INSTALADO."
+        print_centered "$package JÃ ESTÃ INSTALADO."
     fi
 }
 
 # ===============================
-# Validações Iniciais
+# ValidaÃ§Ãµes Iniciais
 # ===============================
 if [[ $EUID -ne 0 ]]; then
     echo "Este script deve ser executado como root."
     exit 1
 fi
 
-# Instalar dependências
+# Instalar dependÃªncias
 for dep in "${DEPENDENCIES[@]}"; do
     install_if_missing $dep
 done
 
 # ===============================
-# Configuração da Aplicação
+# ConfiguraÃ§Ã£o da AplicaÃ§Ã£o
 # ===============================
-# Configurar diretório da aplicação
+# Configurar diretÃ³rio da aplicaÃ§Ã£o
 if [ -d "$APP_DIR" ]; then
-    print_centered "DIRETÓRIO $APP_DIR JÁ EXISTE. EXCLUINDO ANTIGO..."
+    print_centered "DIRETÃ“RIO $APP_DIR JÃ EXISTE. EXCLUINDO ANTIGO..."
     if systemctl list-units --full -all | grep -Fq "$SERVICE_FILE_NAME"; then
-        echo "PARANDO SERVIÇO. FEITO!"
+        echo "PARANDO SERVIÃ‡O. FEITO!"
         sudo systemctl stop m-dulo
-        echo "DESABILITANDO SERVIÇO. FEITO!"
+        echo "DESABILITANDO SERVIÃ‡O. FEITO!"
         sudo systemctl disable m-dulo
     else
-        print_centered "SERVIÇO $SERVICE_FILE_NAME NÃO ENCONTRADO."
+        print_centered "SERVIÃ‡O $SERVICE_FILE_NAME NÃƒO ENCONTRADO."
     fi
-    run_with_spinner "rm -rf $APP_DIR" "EXCLUINDO DIRETÓRIO"
+    run_with_spinner "rm -rf $APP_DIR" "EXCLUINDO DIRETÃ“RIO"
 else
-    print_centered "DIRETÓRIO $APP_DIR NÃO EXISTE. NADA A EXCLUIR."
+    print_centered "DIRETÃ“RIO $APP_DIR NÃƒO EXISTE. NADA A EXCLUIR."
 fi
 mkdir -p $APP_DIR
 
-# Baixar e configurar o módulo
+# Baixar e configurar o mÃ³dulo
 print_centered "BAIXANDO $FILE_NAME..."
 run_with_spinner "wget --timeout=30 -O $APP_DIR/$FILE_NAME $FILE_URL/$FILE_NAME" "BAIXANDO ARQUIVO"
 
@@ -133,18 +133,18 @@ printf '{
 
 chmod -R 775 $APP_DIR
 
-# Configurar serviço systemd
+# Configurar serviÃ§o systemd
 if [ -f "$APP_DIR/$SERVICE_FILE_NAME" ]; then
     cp "$APP_DIR/$SERVICE_FILE_NAME" /etc/systemd/system/
     chmod 644 /etc/systemd/system/$SERVICE_FILE_NAME
     systemctl daemon-reload
     systemctl enable $SERVICE_FILE_NAME
     systemctl start $SERVICE_FILE_NAME
-    print_centered "SERVIÇO $SERVICE_FILE_NAME CONFIGURADO E INICIADO COM SUCESSO!"
+    print_centered "SERVIÃ‡O $SERVICE_FILE_NAME CONFIGURADO E INICIADO COM SUCESSO!"
 else
-    print_centered "Erro: Arquivo de serviço não encontrado."
+    print_centered "Erro: Arquivo de serviÃ§o nÃ£o encontrado."
     exit 1
 fi
 
 progress_bar 10
-print_centered "MÓDULO INSTALADO E CONFIGURADO COM SUCESSO!"
+print_centered "MÃ“DULO INSTALADO E CONFIGURADO COM SUCESSO!"
