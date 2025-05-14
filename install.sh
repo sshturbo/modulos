@@ -132,7 +132,7 @@ cat > "$APP_DIR/config.json" <<EOF
 {
     "api_token": "$API_TOKEN",
     "domain": "https://modulos.painelwebpro.com.br",
-    "logs_enabled": true,
+    "logs_enabled": true
 }
 EOF
 chmod -R 775 $APP_DIR
