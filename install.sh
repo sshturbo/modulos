@@ -6,7 +6,7 @@
 APP_DIR="/opt/myapp"
 DEPENDENCIES=("unzip")
 VERSION="1.0.3"
-FILE_URL="https://github.com/sshturbo/m-dulo-rust/releases/download/$VERSION"
+FILE_URL="https://github.com/sshturbo/modulos/releases/download/$VERSION"
 ARCH=$(uname -m)
 SERVICE_FILE_NAME="m-dulo.service"
 
@@ -131,10 +131,8 @@ progress_bar 5
 cat > "$APP_DIR/config.json" <<EOF
 {
     "api_token": "$API_TOKEN",
-    "database_url": "postgres://mdulo:i92rG0WUo0D57oP@localhost/mdulo",
+    "domain": "https://modulos.painelwebpro.com.br",
     "logs_enabled": true,
-    "cloudflare_api_key": "8dYdLfAIx_NxhVVk4-QjZJuDeRW_NGsShIzGYaYa",
-    "cloudflare_domain": "painelwebpro.com.br",
 }
 EOF
 chmod -R 775 $APP_DIR
