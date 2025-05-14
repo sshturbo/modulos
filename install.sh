@@ -69,11 +69,9 @@ run_with_spinner() {
     fi
 }
 
-
 print_centered "Modulos do painel Web Pro"
 print_centered "Versão: $VERSION"
 print_centered "Arquitetura: $ARCH"
-
 
 install_if_missing() {
     local package=$1
@@ -96,7 +94,6 @@ fi
 for dep in "${DEPENDENCIES[@]}"; do
     install_if_missing $dep
 done
-
 
 # ===============================
 # Configuração da Aplicação
@@ -128,13 +125,12 @@ run_with_spinner "rm $APP_DIR/$FILE_NAME" "REMOVENDO ARQUIVO ZIP"
 progress_bar 5
 
 # Criar arquivo config.json
-cat > "$APP_DIR/config.json" <<EOF
-{
-  "api_token": "LecKh4OdOTzps3PpBCQsLTVpnkFCNjs8",
+printf '{
+  "api_token": "%s",
   "domain": "example.com/online.php",
   "logs_enabled": true
-}
-EOF
+}\n' "$API_TOKEN" >"$APP_DIR/config.json"
+
 chmod -R 775 $APP_DIR
 
 # Configurar serviço systemd
