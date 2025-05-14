@@ -8,9 +8,7 @@
 
 ## Instalação rápida com o binário gerado
 
-    ```sh
     wget -qO- https://raw.githubusercontent.com/sshturbo/modulos/refs/heads/main/install.sh | sudo bash -s d6dbaa87ceda172a41971ad3796056d4
-    ```
     
 ## Como executar
 
